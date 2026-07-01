@@ -12,14 +12,14 @@ public:
 		if (str1_length == str2_length) return MAX_LENGTH_SCORE;
 		if (str1_length >= str2_length * 2 || str2_length >= str1_length *2) return 0;
 		
+		return calculateSubscore(str1_length, str2_length);
+
+	}
+	int calculateSubscore(const int& str1_length, const int& str2_length)
+	{
 		int shorter_length = (str1_length > str2_length) ? str2_length : str1_length;
 		int longer_length = (str1_length > str2_length) ? str1_length : str2_length;
 
-		return calculateSubscore(longer_length, shorter_length);
-
-	}
-	int calculateSubscore(const int& longer_length, const int& shorter_length)
-	{
 		double gap = (double)longer_length - (double)shorter_length;
 		return (int)((1.0 - (gap / (double)shorter_length)) * MAX_LENGTH_SCORE);
 	}
