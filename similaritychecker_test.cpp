@@ -3,9 +3,13 @@
 
 using namespace testing;
 
-TEST(SimilarityCheck, TC1)
+TEST(SimilarityCheck, SameLength)
 {
-
+	SimilarityChecker similarityChecker;
+	
+	int actual = similarityChecker.getLengthScore("ASD", "DSA");
+	int expect = 60;
+	EXPECT_EQ(expect, actual);
 }
 
 int main()
