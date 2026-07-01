@@ -12,6 +12,15 @@ TEST(SimilarityCheck, SameLength)
 	EXPECT_EQ(expect, actual);
 }
 
+TEST(SimilarityCheck, SameLength)
+{
+	SimilarityChecker similarityChecker;
+	
+	int actual = similarityChecker.getLengthScore("A", "BB");
+	int expect = 60;
+	EXPECT_EQ(expect, actual);
+}
+
 int main()
 {
 	InitGoogleMock();
