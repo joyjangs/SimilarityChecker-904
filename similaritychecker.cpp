@@ -6,17 +6,21 @@ class SimilarityChecker {
 	const int MAX_LENGTH_SCORE = 60;
 public:
 	int getLengthScore(const string& str1, const string& str2) {
-		if (str1.length() == str2.length()) return MAX_LENGTH_SCORE;
-		if (str1.length() >= str2.length() * 2 || str2.length() >= str1.length()*2) return 0;
+		int str1_length = str1.length();
+		int str2_length = str2.length();
+
+		if (str1_length == str2_length) return MAX_LENGTH_SCORE;
+		if (str1_length >= str2_length * 2 || str2_length >= str1_length *2) return 0;
 		
-		int result = 0;
-		if (str1.length() > str2.length()) {
-			result = (int) ((1.0 - (double)(str1.length() - str2.length()) / (double)str2.length()) * 60.0);
-		}
-		else {
-			result = (int)((1.0 - (double)(str2.length() - str1.length()) / (double)str1.length()) * 60.0);
-		}
-		
-		return result;
+		int shorter_length = (str1_length > str2_length) ? str2_length : str1_length;
+		int longer_length = (str1_length > str2_length) ? str1_length : str2_length;
+
+		return calculateSubscore(longer_length, shorter_length);
+
+	}
+	int calculateSubscore(const int& longer_length, const int& shorter_length)
+	{
+		double gap = (double)longer_length - (double)shorter_length;
+		return (int)((1.0 - (gap / (double)shorter_length)) * MAX_LENGTH_SCORE);
 	}
 };
