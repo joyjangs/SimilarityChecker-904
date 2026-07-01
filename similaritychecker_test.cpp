@@ -3,22 +3,22 @@
 
 using namespace testing;
 
-TEST(SimilarityCheck, SameLength)
-{
+class SimilarityFixture : public Test {
+public:
 	SimilarityChecker similarityChecker;
-	
-	int actual = similarityChecker.getLengthScore("ASD", "DSA");
-	int expect = 60;
-	EXPECT_EQ(expect, actual);
+	void checkLengthScore(int expect, string str1, string str2) {
+		EXPECT_EQ(expect, similarityChecker.getLengthScore(str1, str2));
+	}
+};
+
+TEST_F(SimilarityFixture, SameLength)
+{
+	checkLengthScore(60, "ASD", "DSA");
 }
 
-TEST(SimilarityCheck, SameLength)
+TEST_F(SimilarityFixture, SameLength)
 {
-	SimilarityChecker similarityChecker;
-	
-	int actual = similarityChecker.getLengthScore("A", "BB");
-	int expect = 60;
-	EXPECT_EQ(expect, actual);
+	checkLengthScore(0, "A", "BB");
 }
 
 int main()
